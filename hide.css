@@ -63,3 +63,14 @@
 	margin-bottom: 25px;
 	font-style: italic;
 }
+
+#answer2,
+#show2,
+#hide2:target {
+    display: none; 
+}
+
+#hide2:target + #show2,
+#hide2:target ~ #answer2 {
+    display: inherit; 
+}
