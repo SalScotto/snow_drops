@@ -12,22 +12,24 @@ LoggerUtil.prototype = {
         this.day = gdt.getDayOfMonthUTC();
 
         this.debug = gs.getProperty('PROPERTY NAME EXPRESSING IF THE DEBUG IS ON', true);
-        this.signature = log_sign;
+        if(log_sign){
+            this.signature = log_sign + ":\t ";
+        }
         this.isProduction = gs.getProperty('instance_name') == 'Production instance name';
     },
 
     info: function(message){
         if(this.debug && !this.isProduction) {
-            gs.info(this.log_sign+":\t "+message);
+            gs.info(this.signature+message);
         }
     },
 
     warning: function(message){
-        gs.warn(this.log_sign+":\t "+message);
+        gs.warn(this.signature+message);
     },
 
     error: function(message){
-        gs.error(this.log_sign+":\t "+message);
+        gs.error(this.signature+message);
     },
 
     tick: function(){
@@ -35,6 +37,7 @@ LoggerUtil.prototype = {
     },
 
     time: function(_tick){
+        //Takes the value returned by this.tick() and returns the delay in milliseconds
         var tock = new GlideDateTime().getNumericValue();
         return (tock - _tick);
     }
