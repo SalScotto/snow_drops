@@ -21,15 +21,15 @@ while (metric_types_to_delete.next()) {
     questions.query();
     questions.deleteMultiple();
 
-    var group = new GlideRecord('asmt_assessment');
-    group.addEncodedQuery('metric_type=' + metric_id);
-    group.query();
-    group.deleteMultiple();
-
     var instances = new GlideRecord('asmt_assessment_instance');
     instances.addEncodedQuery('metric_type=' + metric_id);
     instances.query();
     instances.deleteMultiple();
+
+    var group = new GlideRecord('asmt_assessment');
+    group.addEncodedQuery('metric_type=' + metric_id);
+    group.query();
+    group.deleteMultiple();
 
     var metric_type = new GlideRecord('asmt_metric_type');
     metric_type.get(metric_id);
